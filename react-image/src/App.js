@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import AddImage from './Components/AddImage';
-import ImagePreview from './Components/ImagePreview';
+import TransformImage from './Components/TransformImage';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        React Image
         <AddImage />
-        <ImagePreview />
+        <TransformImage />
       </div>
     );
   }

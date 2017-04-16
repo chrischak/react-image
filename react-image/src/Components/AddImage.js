@@ -15,7 +15,6 @@ class AddImage extends Component {
     let reader = new FileReader();
     let file = e.target.files[0];
     console.log("photo file has been chosen");
-    console.log(file);
 
     reader.onloadend = () => {
       this.setState({
