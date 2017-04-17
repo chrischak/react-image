@@ -1,14 +1,46 @@
 import React, { Component } from 'react';
-import AddImage from './Components/AddImage';
 import TransformImage from './Components/TransformImage';
 import './App.css';
+
+var TRANSFORMS = [
+  {
+    action:'Rotate',
+    apply:false,
+    css: {
+      '-moz-transform':'rotate(45deg)',
+      '-webkit-transform':'rotate(45deg)',
+      'transform':'rotate(45deg)',
+      '-ms-transform':'rotate(45deg)'
+    }
+  },
+  {
+    action:'Translate',
+    apply:false,
+    css: {
+     'transform':'translateX(-40px)'
+    }
+  },
+  {
+    action:'Opacity',
+    apply:false,
+    css: {
+      'opacity': '0.5'
+    }
+  },
+  {
+    action:'Scale',
+    apply:false,
+    css: {
+     'transform':'scale(0.5,0.5)'
+    }
+  },
+]
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <AddImage />
-        <TransformImage />
+        <TransformImage transforms={TRANSFORMS}/>
       </div>
     );
   }

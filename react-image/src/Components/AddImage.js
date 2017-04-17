@@ -29,15 +29,18 @@ class AddImage extends Component {
   render(){
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
+
     if (imagePreviewUrl) {
       let {fileName} = this.state.file.name;
-      $imagePreview = (<img src={imagePreviewUrl} alt={fileName}/>);
+      $imagePreview = (<img src={imagePreviewUrl} alt={fileName} style={this.props.imgStyle} />);
     }
     return(
       <div>
           <h1>Load A Photo</h1>
           <input type="file" id="the-photo-file-field" onChange={this.handleAddImage.bind(this)} />
-          {$imagePreview}
+          <div className="imagePreview">
+            {$imagePreview}
+          </div>
       </div>
     )
   }

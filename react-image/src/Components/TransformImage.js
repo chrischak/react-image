@@ -1,48 +1,69 @@
 import React, { Component } from 'react';
-import AppliedTransforms from './AppliedTransforms';
+import AddImage from './AddImage';
 
 class TransformImage extends Component {
-  constructor(){
-    super();
-    this.state={
-      transforms:[
-        {
-          action:'Rotate',
-          apply:false
-        },
-        {
-          action:'Translate',
-          apply:false
-        },
-        {
-          action:'Opacity',
-          apply:false
-        },
-        {
-          action:'Scale',
-          apply:true
-        },
-      ]
-    }
+  constructor(props){
+    super(props);
+      this.state = {
+        divStyle:[],
+        imgStyle:{}
+      }
   }
+
+  getStyle(index){
+    let divStyle = index;
+    let transforms = this.props.transforms;
+    let imgStyle = {};
+    if (divStyle.length > 0){
+      if(transforms){
+        transforms.forEach( function(action, i){
+          if(divStyle.indexOf(i) !== -1){
+            Object.assign(imgStyle,action.css)
+          }
+        });
+      }
+    }
+    this.setState({imgStyle:imgStyle});
+    console.log(this.state.imgStyle);
+  }
+
   handleAvailableClick(id) {
-    let transforms = this.state.transforms;
+    let transforms = this.props.transforms;
+    let divStyle = this.state.divStyle;
     let index = transforms.findIndex(x => x.action === id);
+    divStyle.push(index)
     transforms[index].apply = true;
+    this.setState({divStyle:divStyle});
     this.setState({transforms:transforms})
+    this.getStyle(divStyle);
   }
 
   handleAppliedClick(id) {
-    let transforms = this.state.transforms;
+    let transforms = this.props.transforms;
+    let divStyle = this.state.divStyle;
     let index = transforms.findIndex(x => x.action === id);
+    let imgStyle = divStyle.filter(value => value !== index);
     transforms[index].apply = false;
+    this.setState({divStyle:imgStyle});
     this.setState({transforms:transforms})
+    this.getStyle(imgStyle);
+  }
+
+  handleReset(){
+    let transforms = this.props.transforms;
+    if(transforms){
+      transforms.forEach( function(action, i){
+        transforms[i].apply = false;
+      });
+    }
+    this.setState({divStyle:[]});
+    this.setState({imgStyle:{}})
   }
 
   render() {
     let availableTransforms = [];
     let appliedTransforms = [];
-    let transforms = this.state.transforms;
+    let transforms = this.props.transforms;
 
     if(transforms){
       transforms.forEach( function(action, i){
@@ -59,6 +80,9 @@ class TransformImage extends Component {
     }
       return (
         <div>
+          <AddImage imgStyle={this.state.imgStyle}/>
+          <br/>
+
           <h3>Available Actions</h3>
           <br/>
           {availableTransforms}
@@ -66,6 +90,9 @@ class TransformImage extends Component {
           <h3>Applied Actions</h3>
           <br/>
           {appliedTransforms}
+
+          <br/>
+          <button type="button"  onClick={this.handleReset.bind(this)}>Reset</button>
         </div>
       );
   }
