@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AddImage from './AddImage';
+import { Button } from 'react-bootstrap';
 
 class TransformImage extends Component {
   constructor(props){
@@ -77,11 +78,11 @@ class TransformImage extends Component {
       transforms.forEach( function(action, i){
         if(action.apply){
           appliedTransforms.push(
-            <button type="button" key={action.action} onClick={this.handleAppliedClick.bind(this, action.action)}>{action.action}</button>
+            <Button type="button" key={action.action} onClick={this.handleAppliedClick.bind(this, action.action)}>{action.action}asd</Button>
           );
         }else{
           availableTransforms.push(
-            <button type="button" key={action.action} onClick={this.handleAvailableClick.bind(this, action.action)}>{action.action}</button>
+            <Button type="button" key={action.action} onClick={this.handleAvailableClick.bind(this, action.action)}>{action.action}</Button>
           );
         }
       }.bind(this));
