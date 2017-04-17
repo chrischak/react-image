@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AddImage from './AddImage';
-import { Button } from 'react-bootstrap';
 
 class TransformImage extends Component {
   constructor(props){
@@ -18,7 +17,6 @@ class TransformImage extends Component {
     if (divStyle.length > 0){
       if(transforms){
         transforms.forEach( function(action, i){
-          console.log(action);
           if(divStyle.indexOf(i) !== -1){
             if(Object.keys(imgStyle).length > 0 && Object.keys(imgStyle).indexOf(Object.keys(action.css)[0]) !== -1){
               let tmpKey = Object.keys(action.css)[0];
@@ -32,7 +30,6 @@ class TransformImage extends Component {
         });
       }
     }
-    console.log(imgStyle);
     this.setState({imgStyle:imgStyle});
   }
 
@@ -78,30 +75,33 @@ class TransformImage extends Component {
       transforms.forEach( function(action, i){
         if(action.apply){
           appliedTransforms.push(
-            <Button type="button" key={action.action} onClick={this.handleAppliedClick.bind(this, action.action)}>{action.action}asd</Button>
+            <button type="button" className="btn btn-default" key={action.action} onClick={this.handleAppliedClick.bind(this, action.action)}>{action.action}</button>
           );
         }else{
           availableTransforms.push(
-            <Button type="button" key={action.action} onClick={this.handleAvailableClick.bind(this, action.action)}>{action.action}</Button>
+            <button type="button" className="btn btn-default" key={action.action} onClick={this.handleAvailableClick.bind(this, action.action)}>{action.action}</button>
           );
         }
       }.bind(this));
     }
       return (
-        <div>
-          <AddImage imgStyle={this.state.imgStyle}/>
-          <br/>
+        <div className="row is-flex">
+            <AddImage imgStyle={this.state.imgStyle}/>
 
-          <h3>Available Actions</h3>
-          <br/>
-          {availableTransforms}
+            <div className="col-xs-6 col-sm-4">
+              <h3>Available Actions</h3>
+              <br/>
+              {availableTransforms}
+            </div>
 
-          <h3>Applied Actions</h3>
-          <br/>
-          {appliedTransforms}
+            <div className="col-xs-6 col-sm-4">
+              <h3>Applied Actions</h3>
+              <br/>
+              {appliedTransforms}
+              <br/>
+              <button type="button" className="btn btn-default btn-bottom" onClick={this.handleReset.bind(this)}>Reset</button>
+            </div>
 
-          <br/>
-          <button type="button"  onClick={this.handleReset.bind(this)}>Reset</button>
         </div>
       );
   }

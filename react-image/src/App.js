@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TransformImage from './Components/TransformImage';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 var TRANSFORMS = [
   {
@@ -36,7 +37,7 @@ var TRANSFORMS = [
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="container-fluid">
         <TransformImage transforms={TRANSFORMS}/>
       </div>
     );

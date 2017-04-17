@@ -35,12 +35,12 @@ class AddImage extends Component {
       $imagePreview = (<img src={imagePreviewUrl} alt={fileName} style={this.props.imgStyle} />);
     }
     return(
-      <div>
+      <div className="col-xs-6 col-sm-4">
           <h1>Choose An Image</h1>
-          <input type="file" id="the-photo-file-field" onChange={this.handleAddImage.bind(this)} />
           <div className="imagePreview">
             {$imagePreview}
           </div>
+          <input type="file" className="btn btn-default btn-bottom" id="the-photo-file-field" onChange={this.handleAddImage.bind(this)} />
       </div>
     )
   }
