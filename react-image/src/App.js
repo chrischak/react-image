@@ -7,10 +7,7 @@ var TRANSFORMS = [
     action:'Rotate',
     apply:false,
     css: {
-      '-moz-transform':'rotate(45deg)',
-      '-webkit-transform':'rotate(45deg)',
-      'transform':'rotate(45deg)',
-      '-ms-transform':'rotate(45deg)'
+      'transform':'rotate(45deg)'
     }
   },
   {

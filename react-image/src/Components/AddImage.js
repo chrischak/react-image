@@ -36,7 +36,7 @@ class AddImage extends Component {
     }
     return(
       <div>
-          <h1>Load A Photo</h1>
+          <h1>Choose An Image</h1>
           <input type="file" id="the-photo-file-field" onChange={this.handleAddImage.bind(this)} />
           <div className="imagePreview">
             {$imagePreview}

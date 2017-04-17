@@ -17,14 +17,22 @@ class TransformImage extends Component {
     if (divStyle.length > 0){
       if(transforms){
         transforms.forEach( function(action, i){
+          console.log(action);
           if(divStyle.indexOf(i) !== -1){
-            Object.assign(imgStyle,action.css)
+            if(Object.keys(imgStyle).length > 0 && Object.keys(imgStyle).indexOf(Object.keys(action.css)[0]) !== -1){
+              let tmpKey = Object.keys(action.css)[0];
+              let tmpStyle = {};
+              tmpStyle[tmpKey] = action.css[tmpKey] + ' ' + imgStyle[tmpKey]
+              Object.assign(imgStyle,tmpStyle)
+            }else {
+              Object.assign(imgStyle,action.css)
+            }
           }
         });
       }
     }
+    console.log(imgStyle);
     this.setState({imgStyle:imgStyle});
-    console.log(this.state.imgStyle);
   }
 
   handleAvailableClick(id) {
